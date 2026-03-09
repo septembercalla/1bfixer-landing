@@ -27,27 +27,52 @@
             min-height: 100vh;
         }
 
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 999;
+        }
+
         nav {
-            padding: 24px 48px;
-            border-bottom: 1px solid var(--border);
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            gap: 20px;
+            z-index: 1000;
+            backdrop-filter: blur(20px);
+            background: rgba(10, 10, 10, 0.82);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
             flex-wrap: wrap;
         }
 
-        nav a.logo {
+        .logo {
             font-family: 'Instrument Serif', serif;
             font-size: 28px;
             color: var(--text);
             text-decoration: none;
+            margin-right: 8px;
         }
 
-        nav a.logo span { color: var(--accent); }
+        .logo span {
+            color: var(--accent);
+        }
 
         .nav-links {
             display: flex;
+            align-items: center;
             gap: 12px;
             flex-wrap: wrap;
         }
@@ -56,24 +81,41 @@
             text-decoration: none;
             color: var(--text);
             font-size: 14px;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            background: rgba(255,255,255,0.02);
-            padding: 10px 16px;
+            font-weight: 600;
+            padding: 11px 18px;
             border-radius: 999px;
-            transition: 0.25s ease;
+            border: 1px solid rgba(255,255,255,0.08);
+            background: rgba(255,255,255,0.03);
+            transition: all 0.25s ease;
         }
 
-        .nav-links a:hover {
-            border-color: rgba(200, 255, 0, 0.35);
+        .nav-links a:hover,
+        .nav-links a.active {
             color: var(--accent);
+            border-color: rgba(200, 255, 0, 0.35);
             background: var(--accent-dim);
         }
 
+        .nav-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent);
+            border: 1px solid rgba(200, 255, 0, 0.35);
+            padding: 8px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+        }
+
+        .page-wrap {
+            padding-top: 110px;
+        }
+
         .content {
-            max-width: 720px;
+            max-width: 760px;
             margin: 0 auto;
-            padding: 80px 24px 120px;
+            padding: 40px 24px 120px;
         }
 
         h1 {
@@ -104,31 +146,8 @@
             margin-bottom: 16px;
         }
 
-        a { color: var(--accent); }
-
-        .page-actions {
-            margin-top: 48px;
-            display: flex;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .page-actions a {
-            text-decoration: none;
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 500;
-            border: 1px solid var(--border);
-            background: rgba(255,255,255,0.02);
-            padding: 12px 18px;
-            border-radius: 999px;
-            transition: 0.25s ease;
-        }
-
-        .page-actions a:hover {
-            border-color: rgba(200, 255, 0, 0.35);
+        a {
             color: var(--accent);
-            background: var(--accent-dim);
         }
 
         footer {
@@ -139,53 +158,74 @@
             color: var(--text-muted);
         }
 
-        @media (max-width: 768px) {
-            nav { padding: 16px 24px; }
+        @media (max-width: 900px) {
+            nav {
+                padding: 16px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .nav-left {
+                gap: 12px;
+            }
+
+            .page-wrap {
+                padding-top: 120px;
+            }
         }
     </style>
 </head>
 <body>
+
     <nav>
-        <a class="logo" href="/">N<span>.</span>VA</a>
-        <div class="nav-links">
-            <a href="/">Home</a>
-            <a href="/privacy/">Privacy</a>
-            <a href="/terms/">Terms</a>
+        <div class="nav-left">
+            <a class="logo" href="/">N<span>.</span>VA</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/privacy/" class="active">Privacy</a>
+                <a href="/terms/">Terms</a>
+            </div>
         </div>
+        <div class="nav-badge">Coming Soon</div>
     </nav>
 
-    <div class="content">
-        <h1>Privacy Policy</h1>
-        <p class="date">Last updated: March 9, 2026</p>
+    <div class="page-wrap">
+        <div class="content">
+            <h1>Privacy Policy</h1>
+            <p class="date">Last updated: March 9, 2026</p>
 
-        <h2>Overview</h2>
-        <p>Nova (operated by Khudyna LLC) respects your privacy. This policy describes how we collect, use, and protect your personal information when you use the Nova mobile application and related services.</p>
+            <h2>Overview</h2>
+            <p>Nova, operated by Khudyna LLC, respects your privacy. This policy explains how we collect, use, and protect your personal information when you use the Nova mobile application and related services.</p>
 
-        <h2>Information We Collect</h2>
-        <p>We collect user information such as name, email address, phone number, physical address, and service request details in order to provide home repair services through the Nova mobile application.</p>
+            <h2>Information We Collect</h2>
+            <p>We may collect information such as your name, email address, phone number, service address, account details, uploaded photos, and service request information in order to provide our home services marketplace.</p>
 
-        <h2>How We Use Your Information</h2>
-        <p>Your information is used to match you with qualified home repair professionals, process service requests, facilitate payments, and communicate important updates about your service.</p>
+            <h2>How We Use Your Information</h2>
+            <p>Your information is used to create and manage your account, match you with qualified service professionals, process service requests, facilitate payments, improve the user experience, and provide support.</p>
 
-        <h2>SMS Notifications</h2>
-        <p>Your phone number may be used to send service-related SMS notifications including technician assignment, appointment reminders, schedule changes, technician arrival updates, and service status notifications. These are transactional messages related to active service requests only.</p>
-        <p>Message and data rates may apply. You may reply STOP to opt out of SMS messages at any time. Reply HELP for assistance.</p>
+            <h2>SMS Notifications</h2>
+            <p>Your phone number may be used to send service-related SMS notifications, including technician assignment alerts, appointment reminders, arrival updates, service status changes, and payment confirmations. These messages are transactional and relate only to active service requests.</p>
+            <p>Message and data rates may apply. You may reply STOP to opt out of SMS messages at any time. Reply HELP for assistance.</p>
 
-        <h2>Data Sharing</h2>
-        <p>We do not sell or share your personal information with third parties for marketing purposes. Your information may be shared with assigned service professionals solely for the purpose of completing your service request.</p>
+            <h2>Email Communications</h2>
+            <p>We may send service-related emails, including confirmations, receipts, estimate updates, account notifications, and support communications.</p>
 
-        <h2>Data Security</h2>
-        <p>We implement industry-standard security measures to protect your personal information, including encrypted data transmission and secure data storage.</p>
+            <h2>Data Sharing</h2>
+            <p>We do not sell your personal information. We may share necessary information with assigned service professionals and trusted service providers only to operate the platform and complete your requested service.</p>
 
-        <h2>Contact</h2>
-        <p>If you have questions about this privacy policy, please contact us at <a href="mailto:support@1bfixer.com">support@1bfixer.com</a>.</p>
+            <h2>Data Security</h2>
+            <p>We use reasonable administrative, technical, and organizational safeguards to protect personal information, including secure data transmission and access controls.</p>
 
-        <div class="page-actions">
-            <a href="/">← Back to Home</a>
-            <a href="/terms/">Open Terms</a>
+            <h2>Your Choices</h2>
+            <p>You may update certain account information through the application. You may also opt out of transactional SMS by replying STOP, though doing so may affect important service updates.</p>
+
+            <h2>Contact</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@1bfixer.com">support@1bfixer.com</a>.</p>
         </div>
     </div>
 
     <footer>&copy; 2026 NOVA by Khudyna LLC. All rights reserved.</footer>
+
 </body>
 </html>
