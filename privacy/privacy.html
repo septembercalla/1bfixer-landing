@@ -1,0 +1,330 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy — NOVA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0f1f3e;
+            --surface: #1f3a61;
+            --border: #3d5a8f;
+            --text: #f5f9ff;
+            --text-muted: #b8cfe8;
+            --accent: #5eb3ff;
+            --accent-bright: #7fc9ff;
+            --accent-dim: rgba(94, 179, 255, 0.12);
+            --accent-dim-hover: rgba(94, 179, 255, 0.22);
+            --glass-light: rgba(255, 255, 255, 0.08);
+            --glass-light-hover: rgba(255, 255, 255, 0.15);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        /* Animated gradient background */
+        body::before {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.03) 0%, rgba(58, 123, 213, 0.02) 50%, rgba(74, 158, 255, 0.01) 100%);
+            pointer-events: none;
+            z-index: 1;
+            animation: gradientShift 8s ease infinite;
+        }
+
+        body::after {
+            content: '';
+            position: fixed;
+            inset: 0;
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.02'/%3E%3C/svg%3E");
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(10px, 10px); }
+        }
+
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(74, 158, 255, 0.15); }
+            50% { box-shadow: 0 0 40px rgba(74, 158, 255, 0.25); }
+        }
+
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            z-index: 1000;
+            backdrop-filter: blur(30px);
+            background: rgba(15, 31, 62, 0.65);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            transform: translateY(0);
+        }
+
+        nav.hidden {
+            display: none;
+        }
+
+        nav.visible {
+            display: flex;
+        }
+
+        .nav-left {
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 10;
+        }
+
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 8px;
+            font-weight: 500;
+            letter-spacing: -1px;
+        }
+
+        .logo span {
+            color: var(--accent-bright);
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            background: rgba(74, 158, 255, 0.05);
+            transition: all 0.25s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-bright);
+            border-color: var(--accent-bright);
+            background: var(--accent-dim-hover);
+        }
+
+        .nav-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            border: 1px solid var(--accent-bright);
+            padding: 8px 14px;
+            border-radius: 999px;
+            white-space: nowrap;
+            animation: glowPulse 3s ease infinite;
+        }
+
+        .page-wrap {
+            padding-top: 110px;
+            position: relative;
+            z-index: 3;
+        }
+
+        .content {
+            max-width: 760px;
+            margin: 0 auto;
+            padding: 40px 24px 120px;
+        }
+
+        h1 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 42px;
+            font-weight: 400;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, var(--text) 0%, var(--accent-bright) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            animation: fadeUp 0.6s ease forwards;
+        }
+
+        .date {
+            font-size: 14px;
+            color: var(--text-muted);
+            margin-bottom: 48px;
+            animation: fadeUp 0.6s ease forwards 0.1s;
+            opacity: 0;
+        }
+
+        p {
+            font-size: 16px;
+            line-height: 1.8;
+            color: var(--text-muted);
+            margin-bottom: 24px;
+            animation: fadeUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        h2 {
+            font-size: 20px;
+            font-weight: 600;
+            color: var(--accent-bright);
+            margin-top: 40px;
+            margin-bottom: 16px;
+            animation: fadeUp 0.6s ease forwards;
+            opacity: 0;
+        }
+
+        a {
+            color: var(--accent-bright);
+            text-decoration: none;
+            transition: all 0.25s ease;
+            position: relative;
+        }
+
+        a:hover {
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        footer {
+            padding: 40px 48px;
+            border-top: 1px solid var(--border);
+            text-align: center;
+            font-size: 14px;
+            color: var(--text-muted);
+            position: relative;
+            z-index: 3;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 900px) {
+            nav {
+                padding: 16px 20px;
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 14px;
+            }
+
+            .nav-left {
+                gap: 12px;
+                width: 100%;
+            }
+
+            .nav-badge {
+                align-self: flex-end;
+                margin-top: -40px;
+            }
+
+            .page-wrap {
+                padding-top: 140px;
+            }
+
+            h1 {
+                font-size: 32px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <nav id="navbar">
+        <div class="nav-left">
+            <a class="logo" href="/">N<span>.</span>VA</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/privacy/" class="active">Privacy</a>
+                <a href="/terms/">Terms</a>
+            </div>
+        </div>
+        <div class="nav-badge">Coming Soon</div>
+    </nav>
+
+    <div class="page-wrap">
+        <div class="content">
+            <h1>Privacy Policy</h1>
+            <p class="date">Last updated: March 18, 2026</p>
+
+            <h2 id="overview">Overview</h2>
+            <p>Nova, operated by Khudyna LLC, respects your privacy. This policy explains how we collect, use, and protect your personal information when you use the Nova mobile application and related services.</p>
+
+            <h2 id="collect">Information We Collect</h2>
+            <p>We may collect information such as your name, email address, phone number, service address, account details, uploaded photos, and service request information in order to provide our home services marketplace.</p>
+
+            <h2 id="use">How We Use Your Information</h2>
+            <p>Your information is used to create and manage your account, match you with qualified service professionals, process service requests, facilitate payments, improve the user experience, and provide support.</p>
+
+            <h2 id="sms">SMS Notifications</h2>
+            <p>Your phone number may be used to send service-related SMS notifications, including technician assignment alerts, appointment reminders, arrival updates, service status changes, and payment confirmations. These messages are transactional and relate only to active service requests.</p>
+            <p>Message and data rates may apply. You may reply STOP to opt out of SMS messages at any time. Reply HELP for assistance.</p>
+
+            <h2 id="email">Email Communications</h2>
+            <p>We may send service-related emails, including confirmations, receipts, estimate updates, account notifications, and support communications.</p>
+
+            <h2 id="sharing">Data Sharing</h2>
+            <p>We do not sell your personal information. We may share necessary information with assigned service professionals and trusted service providers only to operate the platform and complete your requested service.</p>
+
+            <h2 id="security">Data Security</h2>
+            <p>We use reasonable administrative, technical, and organizational safeguards to protect personal information, including secure data transmission and access controls.</p>
+
+            <h2 id="choices">Your Choices</h2>
+            <p>You may update certain account information through the application. You may also opt out of transactional SMS by replying STOP, though doing so may affect important service updates.</p>
+
+            <h2 id="contact">Contact</h2>
+            <p>If you have any questions about this Privacy Policy, please contact us at <a href="mailto:support@1bfixer.com">support@1bfixer.com</a>.</p>
+        </div>
+    </div>
+
+    <footer>&copy; 2026 NOVA by Khudyna LLC. All rights reserved.</footer>
+
+    <script>
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>
