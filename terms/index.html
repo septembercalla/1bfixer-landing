@@ -22,11 +22,7 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        html {
-            scroll-behavior: smooth;
-        }
-
+        html { scroll-behavior: smooth; }
         body {
             font-family: 'DM Sans', sans-serif;
             background: var(--bg);
@@ -36,7 +32,6 @@
             position: relative;
         }
 
-        /* Animated gradient background */
         body::before {
             content: '';
             position: fixed;
@@ -56,15 +51,9 @@
             z-index: 2;
         }
 
-        @keyframes gradientShift {
-            0%, 100% { transform: translate(0, 0); }
-            50% { transform: translate(10px, 10px); }
-        }
-
-        @keyframes glowPulse {
-            0%, 100% { box-shadow: 0 0 20px rgba(74, 158, 255, 0.15); }
-            50% { box-shadow: 0 0 40px rgba(74, 158, 255, 0.25); }
-        }
+        @keyframes gradientShift { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(10px, 10px); } }
+        @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px rgba(74, 158, 255, 0.15); } 50% { box-shadow: 0 0 40px rgba(74, 158, 255, 0.25); } }
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
 
         nav {
             position: fixed;
@@ -79,16 +68,6 @@
             backdrop-filter: blur(25px);
             background: rgba(13, 27, 61, 0.85);
             border-bottom: 1px solid var(--border);
-            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-            transform: translateY(0);
-        }
-
-        nav.hidden {
-            display: none;
-        }
-
-        nav.visible {
-            display: flex;
         }
 
         .nav-left {
@@ -110,9 +89,7 @@
             letter-spacing: -1px;
         }
 
-        .logo span {
-            color: var(--accent-bright);
-        }
+        .logo span { color: var(--accent-bright); }
 
         .nav-links {
             display: flex;
@@ -131,8 +108,6 @@
             border: 1px solid rgba(74, 158, 255, 0.2);
             background: rgba(74, 158, 255, 0.05);
             transition: all 0.25s ease;
-            position: relative;
-            overflow: hidden;
         }
 
         .nav-links a:hover,
@@ -151,7 +126,6 @@
             border: 1px solid var(--accent-bright);
             padding: 8px 14px;
             border-radius: 999px;
-            white-space: nowrap;
             animation: glowPulse 3s ease infinite;
         }
 
@@ -179,38 +153,20 @@
             animation: fadeUp 0.6s ease forwards;
         }
 
-        .date {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 48px;
-            animation: fadeUp 0.6s ease forwards 0.1s;
-            opacity: 0;
-        }
-
-        p {
-            font-size: 16px;
-            line-height: 1.8;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            animation: fadeUp 0.6s ease forwards;
-            opacity: 0;
-        }
-
+        .date { font-size: 14px; color: var(--text-muted); margin-bottom: 48px; }
+        p { font-size: 16px; line-height: 1.8; color: var(--text-muted); margin-bottom: 24px; }
         h2 {
             font-size: 20px;
             font-weight: 600;
             color: var(--accent-bright);
             margin-top: 40px;
             margin-bottom: 16px;
-            animation: fadeUp 0.6s ease forwards;
-            opacity: 0;
         }
 
         a {
             color: var(--accent-bright);
             text-decoration: none;
             transition: all 0.25s ease;
-            position: relative;
         }
 
         a:hover {
@@ -228,176 +184,52 @@
             z-index: 3;
         }
 
-        @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         @media (max-width: 900px) {
-            nav {
-                padding: 16px 20px;
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 14px;
-            }
-
-            .nav-left {
-                gap: 12px;
-                width: 100%;
-            }
-
-            .nav-badge {
-                align-self: flex-end;
-                margin-top: -40px;
-            }
-
-            .page-wrap {
-                padding-top: 140px;
-            }
-
-            h1 {
-                font-size: 32px;
-            }
-
-            .content {
-                padding: 40px 20px 80px;
-            }
+            nav { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 14px; }
+            .nav-left { gap: 12px; width: 100%; }
+            .nav-badge { align-self: flex-end; margin-top: -40px; }
+            .page-wrap { padding-top: 140px; }
+            h1 { font-size: 32px; }
+            .content { padding: 40px 20px 80px; }
         }
 
         @media (max-width: 768px) {
-            nav {
-                padding: 12px 16px;
-            }
-
-            .logo {
-                font-size: 22px;
-            }
-
-            .nav-links {
-                gap: 8px;
-            }
-
-            .nav-links a {
-                font-size: 12px;
-                padding: 8px 12px;
-            }
-
-            .page-wrap {
-                padding-top: 120px;
-            }
-
-            h1 {
-                font-size: 28px;
-                margin-bottom: 10px;
-            }
-
-            .date {
-                font-size: 13px;
-                margin-bottom: 32px;
-            }
-
-            p {
-                font-size: 15px;
-                line-height: 1.7;
-                margin-bottom: 18px;
-            }
-
-            h2 {
-                font-size: 18px;
-                margin-top: 32px;
-                margin-bottom: 14px;
-            }
-
-            .content {
-                padding: 32px 16px 60px;
-            }
-
-            footer {
-                padding: 32px 20px;
-            }
+            nav { padding: 12px 16px; }
+            .logo { font-size: 22px; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 12px; padding: 8px 12px; }
+            .page-wrap { padding-top: 120px; }
+            h1 { font-size: 28px; margin-bottom: 10px; }
+            .date { font-size: 13px; margin-bottom: 32px; }
+            p { font-size: 15px; line-height: 1.7; margin-bottom: 18px; }
+            h2 { font-size: 18px; margin-top: 32px; margin-bottom: 14px; }
+            .content { padding: 32px 16px 60px; }
+            footer { padding: 32px 20px; }
         }
 
         @media (max-width: 480px) {
-            nav {
-                padding: 10px 12px;
-            }
-
-            .logo {
-                font-size: 18px;
-            }
-
-            .nav-links {
-                gap: 6px;
-            }
-
-            .nav-links a {
-                font-size: 11px;
-                padding: 7px 10px;
-            }
-
-            .nav-badge {
-                font-size: 9px;
-                padding: 5px 10px;
-            }
-
-            .page-wrap {
-                padding-top: 100px;
-            }
-
-            h1 {
-                font-size: 24px;
-                margin-bottom: 8px;
-            }
-
-            .date {
-                font-size: 12px;
-                margin-bottom: 24px;
-            }
-
-            p {
-                font-size: 14px;
-                line-height: 1.65;
-                margin-bottom: 16px;
-            }
-
-            h2 {
-                font-size: 16px;
-                margin-top: 28px;
-                margin-bottom: 12px;
-            }
-
-            a {
-                word-break: break-word;
-            }
-
-            .content {
-                padding: 24px 12px 48px;
-                max-width: 100%;
-            }
-
-            footer {
-                padding: 24px 12px;
-                font-size: 12px;
-            }
+            nav { padding: 10px 12px; }
+            .logo { font-size: 18px; }
+            .nav-links { gap: 6px; }
+            .nav-links a { font-size: 11px; padding: 7px 10px; }
+            .nav-badge { font-size: 9px; padding: 5px 10px; }
+            .page-wrap { padding-top: 100px; }
+            h1 { font-size: 24px; margin-bottom: 8px; }
+            .date { font-size: 12px; margin-bottom: 24px; }
+            p { font-size: 14px; line-height: 1.65; margin-bottom: 16px; }
+            h2 { font-size: 16px; margin-top: 28px; margin-bottom: 12px; }
+            .content { padding: 24px 12px 48px; max-width: 100%; }
+            footer { padding: 24px 12px; font-size: 12px; }
         }
 
         @media (max-width: 375px) {
-            h1 {
-                font-size: 22px;
-            }
-
-            h2 {
-                font-size: 15px;
-            }
-
-            p {
-                font-size: 13px;
-            }
+            h1 { font-size: 22px; }
+            h2 { font-size: 15px; }
+            p { font-size: 13px; }
         }
     </style>
 </head>
 <body>
-
     <nav id="navbar">
         <div class="nav-left">
             <a class="logo" href="/">N<span>.</span>VA</a>
@@ -438,7 +270,7 @@
             <p>Message frequency varies based on user activity.</p>
             
             <p><strong>Opt-Out and Support</strong></p>
-            <p>Users can reply STOP at any time to opt out of SMS messages or reply HELP for support. For assistance, contact <a href="mailto:support@1bfixer.com">support@1bfixer.com</a> or call +1 708-640-7474.</p>
+            <p>Users can reply STOP at any time to opt out of SMS messages or reply HELP for support. For assistance, contact support@1bfixer.com or call +1 708-640-7474.</p>
 
             <h2 id="payments">Payments</h2>
             <p>Service fees, deposits, and final payment amounts may be shown in the application before confirmation. Payments are processed through supported payment providers. By submitting payment information, you authorize the applicable charges for approved services.</p>
@@ -456,10 +288,22 @@
             <p>We may update these Terms of Service from time to time. Continued use of the application after changes become effective constitutes acceptance of the updated terms.</p>
 
             <h2 id="contact">Contact</h2>
-            <p>For questions regarding these terms, contact <a href="/cdn-cgi/l/email-protection#4635333636293432067724202f3e23346825292b"><span class="__cf_email__" data-cfemail="780b0d0808170a0c38491a1e11001d0a561b1715">[email&#160;protected]</span></a>.</p>
+            <p>For questions regarding these terms, contact <a href="mailto:support@1bfixer.com">support@1bfixer.com</a>.</p>
         </div>
     </div>
 
-    <footer>&copy; 2026 NOVA by 1bfixer. All rights reserved. | <a href="/cdn-cgi/l/email-protection#b7c4c2c7c7d8c5c3f786d5d1decfd2c599d4d8da"><span class="__cf_email__" data-cfemail="61121411110e131521500307081904134f020e0c">[email&#160;protected]</span></a></footer>
+    <footer>&copy; 2026 NOVA by 1bfixer. All rights reserved. | <a href="mailto:support@1bfixer.com">support@1bfixer.com</a></footer>
 
-    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-st
+    <script>
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
