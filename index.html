@@ -19,7 +19,7 @@
             --accent-bright: #6bb3ff;
             --accent-dim: rgba(74, 158, 255, 0.08);
             --accent-dim-hover: rgba(74, 158, 255, 0.15);
-            --carousel-max-w: 960px;
+            --carousel-max-w: 1100px;
             --carousel-side-pad: 48px;
         }
 
@@ -138,9 +138,7 @@
         .section-label { font-size: 13px; font-weight: 600; letter-spacing: 4px; text-transform: uppercase; color: var(--accent-bright); margin-bottom: 20px; }
         .section-title { font-family: 'Instrument Serif', serif; font-size: clamp(40px, 5vw, 64px); font-weight: 400; letter-spacing: -1.5px; background: linear-gradient(135deg, var(--text) 0%, var(--accent-bright) 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; }
 
-        /* =============================================
-           CAROUSEL — single-slide, perfectly centered
-           ============================================= */
+        /* ===== CAROUSEL ===== */
         .atv-carousel {
             position: relative;
             width: 100%;
@@ -153,8 +151,6 @@
             will-change: transform;
         }
 
-        /*  Each slide takes exactly 100 % of carousel width →
-            only one is ever in the visible overflow rect.       */
         .atv-slide {
             flex: 0 0 100%;
             width: 100%;
@@ -172,7 +168,6 @@
             pointer-events: auto;
         }
 
-        /* The visible card inside the slide */
         .atv-card {
             width: 100%;
             max-width: var(--carousel-max-w);
@@ -186,7 +181,6 @@
                 0 30px 80px rgba(0, 0, 0, 0.4);
         }
 
-        /* Top glow line */
         .atv-card::after {
             content: '';
             position: absolute;
@@ -202,15 +196,42 @@
 
         .atv-slide-inner {
             display: grid;
-            grid-template-columns: 0.85fr 1fr;
-            min-height: 440px;
+            grid-template-columns: 300px 1fr;
+            min-height: 480px;
         }
 
         .atv-slide-text {
-            padding: 48px 40px;
+            padding: 44px 36px;
             display: flex;
             flex-direction: column;
             justify-content: center;
+            position: relative;
+            z-index: 1;
+            background: linear-gradient(
+                135deg,
+                rgba(10, 20, 48, 0.7) 0%,
+                rgba(13, 27, 61, 0.4) 100%
+            );
+            box-shadow: inset -1px 0 0 0 rgba(74, 158, 255, 0.08);
+        }
+
+        .atv-slide-text::before {
+            content: '';
+            position: absolute;
+            top: 50%;
+            left: 40%;
+            transform: translate(-50%, -50%);
+            width: 280px;
+            height: 280px;
+            background: radial-gradient(
+                circle,
+                rgba(74, 158, 255, 0.06) 0%,
+                rgba(74, 158, 255, 0.02) 40%,
+                transparent 70%
+            );
+            pointer-events: none;
+            z-index: -1;
+            filter: blur(20px);
         }
 
         .atv-step-num {
@@ -222,26 +243,30 @@
             background-clip: text;
             line-height: 1;
             margin-bottom: 20px;
+            filter: drop-shadow(0 0 18px rgba(74, 158, 255, 0.2));
         }
 
         .atv-slide-text h3 {
-            font-size: 26px;
+            font-size: 24px;
             font-weight: 700;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             line-height: 1.2;
+            letter-spacing: -0.3px;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
 
         .atv-slide-text p {
-            font-size: 16px;
-            line-height: 1.7;
+            font-size: 15px;
+            line-height: 1.75;
             color: var(--text-muted);
+            letter-spacing: 0.1px;
         }
 
         /* ---------- IMAGE PANEL ---------- */
         .atv-slide-img {
             position: relative;
             overflow: hidden;
-            min-height: 440px;
+            min-height: 480px;
         }
 
         .atv-slide-img img {
@@ -252,52 +277,76 @@
             display: block;
         }
 
-        /* soft blend on the text side */
+        .atv-slide[data-index="0"] .atv-slide-img img {
+            object-position: 70% center;
+        }
+        .atv-slide[data-index="1"] .atv-slide-img img {
+            object-position: center center;
+        }
+        .atv-slide[data-index="2"] .atv-slide-img img {
+            object-position: center center;
+        }
+
+        /* ::before — left-side cinematic blend (unchanged) */
         .atv-slide-img::before {
             content: '';
             position: absolute;
             top: 0; left: 0; bottom: 0;
-            width: 48px;
-            background: linear-gradient(90deg, rgba(13, 27, 61, 0.6) 0%, transparent 100%);
-            z-index: 1;
+            width: 100px;
+            background: linear-gradient(
+                90deg,
+                rgba(10, 20, 48, 0.85) 0%,
+                rgba(13, 27, 61, 0.5) 40%,
+                rgba(13, 27, 61, 0.15) 70%,
+                transparent 100%
+            );
+            z-index: 2;
             pointer-events: none;
         }
 
-        /* ===== NAV ARROWS ===== */
-        .atv-arrow {
+        /* ── NEW: ::after — perimeter vignette overlay ──
+           Combines:
+           1. Radial vignette (darkens edges, clear center)
+           2. Top edge gradient
+           3. Right edge gradient
+           4. Bottom edge gradient
+           Layered as multiple backgrounds on one pseudo-element. */
+        .atv-slide-img::after {
+            content: '';
             position: absolute;
-            top: 50%;
-            transform: translateY(-50%);
-            z-index: 10;
-            width: 48px; height: 48px;
-            border-radius: 50%;
-            border: 1px solid var(--border);
-            background: rgba(13, 27, 61, 0.85);
-            backdrop-filter: blur(12px);
-            color: var(--accent-bright);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            opacity: 0.7;
+            inset: 0;
+            z-index: 3;
+            pointer-events: none;
+            background:
+                /* radial vignette — clear center, dark perimeter */
+                radial-gradient(
+                    ellipse 85% 80% at 45% 50%,
+                    transparent 55%,
+                    rgba(10, 20, 48, 0.15) 75%,
+                    rgba(10, 20, 48, 0.35) 100%
+                ),
+                /* top edge fade */
+                linear-gradient(
+                    180deg,
+                    rgba(10, 20, 48, 0.3) 0%,
+                    rgba(10, 20, 48, 0.08) 8%,
+                    transparent 18%
+                ),
+                /* bottom edge fade */
+                linear-gradient(
+                    0deg,
+                    rgba(10, 20, 48, 0.3) 0%,
+                    rgba(10, 20, 48, 0.08) 8%,
+                    transparent 18%
+                ),
+                /* right edge fade */
+                linear-gradient(
+                    270deg,
+                    rgba(10, 20, 48, 0.25) 0%,
+                    rgba(10, 20, 48, 0.06) 6%,
+                    transparent 14%
+                );
         }
-        .atv-arrow:hover {
-            opacity: 1;
-            border-color: var(--accent-bright);
-            background: rgba(74, 158, 255, 0.12);
-            transform: translateY(-50%) scale(1.08);
-        }
-        .atv-arrow svg {
-            width: 20px; height: 20px;
-            stroke: currentColor;
-            fill: none;
-            stroke-width: 2;
-            stroke-linecap: round;
-            stroke-linejoin: round;
-        }
-        .atv-arrow-prev { left: max(12px, calc((100vw - var(--carousel-max-w)) / 2 - 64px)); }
-        .atv-arrow-next { right: max(12px, calc((100vw - var(--carousel-max-w)) / 2 - 64px)); }
 
         /* Dots */
         .atv-dots {
@@ -362,14 +411,14 @@
             .nav-badge { align-self: flex-end; margin-top: -40px; }
             .how-section-header { padding: 0 24px; }
             .atv-slide-inner { grid-template-columns: 1fr; min-height: auto; }
-            .atv-slide-text { padding: 32px 24px 24px; }
-            .atv-slide-img { height: 260px; min-height: 260px; }
+            .atv-slide-text { padding: 32px 24px 24px; box-shadow: none; }
+            .atv-slide-text::before { display: none; }
+            .atv-slide-img { height: 280px; min-height: 280px; }
+            .atv-slide-img::before { width: 0; }
+            .atv-slide-img::after { display: none; }
             .atv-step-num { font-size: 52px; }
             .atv-slide-text h3 { font-size: 22px; }
             .atv-slide-text p { font-size: 15px; }
-            .atv-arrow { width: 40px; height: 40px; }
-            .atv-arrow-prev { left: 10px; }
-            .atv-arrow-next { right: 10px; }
             .sms-section { margin: 40px 24px 0; padding: 40px 24px; }
             .sms-grid { grid-template-columns: 1fr; gap: 24px; }
             footer { flex-direction: column; text-align: center; padding: 40px 24px; }
@@ -397,10 +446,8 @@
             .atv-step-num { font-size: 44px; margin-bottom: 14px; }
             .atv-slide-text h3 { font-size: 19px; margin-bottom: 10px; }
             .atv-slide-text p { font-size: 14px; }
-            .atv-slide-img { height: 220px; min-height: 220px; }
+            .atv-slide-img { height: 240px; min-height: 240px; }
             .atv-slide-img::before { width: 30px; }
-            .atv-arrow { width: 36px; height: 36px; }
-            .atv-arrow svg { width: 16px; height: 16px; }
             .sms-section { margin: 40px 16px 0; padding: 32px 16px; border-radius: 16px; }
             footer { padding: 32px 16px; gap: 16px; }
         }
@@ -427,8 +474,7 @@
             .atv-step-num { font-size: 36px; margin-bottom: 10px; }
             .atv-slide-text h3 { font-size: 16px; margin-bottom: 8px; }
             .atv-slide-text p { font-size: 13px; line-height: 1.5; }
-            .atv-slide-img { height: 180px; min-height: 180px; }
-            .atv-arrow { display: none; }
+            .atv-slide-img { height: 200px; min-height: 200px; }
             .atv-dots { gap: 8px; margin-top: 28px; }
             .atv-dot { width: 6px; height: 6px; }
             .atv-dot.active { width: 22px; }
@@ -482,13 +528,6 @@
             </div>
 
             <div class="atv-carousel">
-                <button class="atv-arrow atv-arrow-prev" id="arrowPrev" aria-label="Previous slide">
-                    <svg viewBox="0 0 24 24"><polyline points="15 18 9 12 15 6"/></svg>
-                </button>
-                <button class="atv-arrow atv-arrow-next" id="arrowNext" aria-label="Next slide">
-                    <svg viewBox="0 0 24 24"><polyline points="9 6 15 12 9 18"/></svg>
-                </button>
-
                 <div class="atv-track" id="atvTrack">
                     <div class="atv-slide active" data-index="0">
                         <div class="atv-card">
@@ -581,7 +620,6 @@
     </footer>
 
     <script>
-        // ===== CAROUSEL — pure percentage-based, zero drift =====
         const track   = document.getElementById('atvTrack');
         const slides  = document.querySelectorAll('.atv-slide');
         const dots    = document.querySelectorAll('.atv-dot');
@@ -593,8 +631,6 @@
         function goTo(index, animate = true) {
             current = ((index % total) + total) % total;
 
-            // Each slide = flex: 0 0 100%  →  offset is simply  current × 100 %
-            // No pixel math, no margin offsets, no drift.
             track.style.transition = animate
                 ? 'transform 0.65s cubic-bezier(0.4, 0, 0.2, 1)'
                 : 'none';
@@ -612,16 +648,10 @@
             autoTimer = setInterval(next, 5000);
         }
 
-        // Dots
         dots.forEach(d => {
             d.addEventListener('click', () => { goTo(parseInt(d.dataset.index)); startAuto(); });
         });
 
-        // Arrows
-        document.getElementById('arrowPrev').addEventListener('click', () => { prev(); startAuto(); });
-        document.getElementById('arrowNext').addEventListener('click', () => { next(); startAuto(); });
-
-        // Touch / swipe
         track.addEventListener('touchstart', e => {
             touchStartX = e.changedTouches[0].screenX;
         }, { passive: true });
@@ -634,17 +664,14 @@
             }
         }, { passive: true });
 
-        // Keyboard
         document.addEventListener('keydown', e => {
             if (e.key === 'ArrowRight') { next(); startAuto(); }
             if (e.key === 'ArrowLeft')  { prev(); startAuto(); }
         });
 
-        // Init
         goTo(0, false);
         startAuto();
 
-        // ===== NAVBAR =====
         const navbar      = document.getElementById('navbar');
         const heroSection = document.querySelector('.hero');
         window.addEventListener('scroll', () => {
@@ -657,7 +684,6 @@
             }
         });
 
-        // Smooth scroll anchors
         document.querySelectorAll('a[href^="#"]').forEach(a => {
             a.addEventListener('click', e => {
                 e.preventDefault();
