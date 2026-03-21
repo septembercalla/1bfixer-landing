@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect fill='%230d1b3d' width='100' height='100'/><text x='50' y='70' font-size='80' font-weight='400' font-family='Georgia, serif' fill='%236bb3ff' text-anchor='middle' dominant-baseline='middle'>N</text></svg>">
+    <title>NOVA SMS Consent</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Instrument+Serif&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #0d1b3d;
+            --border: #2d4080;
+            --text: #e8f0ff;
+            --text-muted: #a0b4d4;
+            --accent: #4a9eff;
+            --accent-bright: #6bb3ff;
+            --accent-dim-hover: rgba(74, 158, 255, 0.15);
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            min-height: 100vh;
+        }
+
+        /* ===== NAV — matches main site exactly ===== */
+        nav {
+            padding: 20px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-bottom: 1px solid var(--border);
+            backdrop-filter: blur(25px);
+            background: rgba(13, 27, 61, 0.85);
+        }
+        .nav-left { display: flex; align-items: center; gap: 18px; flex-wrap: wrap; }
+        .logo {
+            font-family: 'Instrument Serif', serif;
+            font-size: 28px;
+            color: var(--text);
+            text-decoration: none;
+            margin-right: 8px;
+            font-weight: 500;
+            letter-spacing: -1px;
+        }
+        .logo span { color: var(--accent-bright); }
+        .nav-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
+        .nav-links a {
+            text-decoration: none;
+            color: var(--text);
+            font-size: 14px;
+            font-weight: 600;
+            padding: 11px 18px;
+            border-radius: 999px;
+            border: 1px solid rgba(74, 158, 255, 0.2);
+            background: rgba(74, 158, 255, 0.05);
+            transition: all 0.25s ease;
+        }
+        .nav-links a:hover,
+        .nav-links a.active {
+            color: var(--accent-bright);
+            border-color: var(--accent-bright);
+            background: var(--accent-dim-hover);
+        }
+        .nav-badge {
+            font-size: 11px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            border: 1px solid var(--accent-bright);
+            padding: 8px 14px;
+            border-radius: 999px;
+            animation: glowPulse 3s ease infinite;
+        }
+        @keyframes glowPulse {
+            0%, 100% { box-shadow: 0 0 20px rgba(74, 158, 255, 0.15); }
+            50% { box-shadow: 0 0 40px rgba(74, 158, 255, 0.25); }
+        }
+
+        /* ===== CONTENT ===== */
+        .page-content {
+            display: flex;
+            justify-content: center;
+            padding: 80px 24px 60px;
+        }
+        .card {
+            width: 100%;
+            max-width: 620px;
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            background: linear-gradient(135deg, rgba(74, 158, 255, 0.04) 0%, rgba(13, 27, 61, 0.95) 100%);
+            padding: 44px 40px;
+        }
+        .eyebrow {
+            font-size: 11px;
+            font-weight: 600;
+            letter-spacing: 2.5px;
+            text-transform: uppercase;
+            color: var(--accent-bright);
+            margin-bottom: 24px;
+        }
+        h2 {
+            font-family: 'Instrument Serif', serif;
+            font-size: 32px;
+            font-weight: 400;
+            letter-spacing: -0.5px;
+            margin-bottom: 28px;
+            color: var(--text);
+        }
+        p {
+            font-size: 15px;
+            line-height: 1.7;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        p:last-of-type { margin-bottom: 0; }
+
+        /* ===== FOOTER — matches main site ===== */
+        footer {
+            padding: 60px 48px;
+            border-top: 1px solid var(--border);
+            max-width: 1100px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 24px;
+        }
+        .footer-left .logo { display: inline-block; margin-bottom: 12px; }
+        .footer-left p { font-size: 14px; color: var(--text-muted); margin-bottom: 0; }
+        .footer-right { text-align: right; }
+        .footer-right .email-link {
+            color: var(--accent-bright);
+            text-decoration: none;
+            font-size: 15px;
+            font-weight: 500;
+        }
+        .footer-right p { font-size: 13px; color: var(--text-muted); margin-top: 8px; margin-bottom: 0; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 768px) {
+            nav { padding: 12px 16px; }
+            .logo { font-size: 24px; }
+            .nav-links { gap: 8px; }
+            .nav-links a { font-size: 13px; padding: 9px 14px; }
+            .page-content { padding: 48px 16px 40px; }
+            .card { padding: 32px 24px; border-radius: 14px; }
+            h2 { font-size: 26px; }
+            p { font-size: 14px; }
+            footer { flex-direction: column; text-align: center; padding: 40px 24px; }
+            .footer-right { text-align: center; }
+        }
+        @media (max-width: 480px) {
+            nav { padding: 10px 12px; gap: 10px; }
+            .logo { font-size: 20px; }
+            .nav-links { gap: 6px; }
+            .nav-links a { font-size: 12px; padding: 8px 12px; }
+            .nav-badge { font-size: 10px; padding: 6px 12px; }
+            .page-content { padding: 32px 12px 24px; }
+            .card { padding: 24px 16px; border-radius: 12px; }
+            h2 { font-size: 22px; }
+            p { font-size: 13px; }
+            footer { padding: 24px 12px; }
+            .footer-left p, .footer-right p { font-size: 11px; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav>
+        <div class="nav-left">
+            <a class="logo" href="/">N<span>.</span>VA</a>
+            <div class="nav-links">
+                <a href="/">Home</a>
+                <a href="/privacy/">Privacy</a>
+                <a href="/terms/">Terms</a>
+                <a href="/sms-consent/" class="active">SMS Consent</a>
+            </div>
+        </div>
+        <div class="nav-badge">Coming Soon</div>
+    </nav>
+
+    <div class="page-content">
+        <div class="card">
+            <p class="eyebrow">Public compliance information</p>
+            <h2>SMS Consent</h2>
+            <p>Users can choose to receive SMS messages inside the NOVA mobile app.</p>
+            <p>Consent is collected via an optional toggle (disabled by default) during signup or in the user profile.</p>
+            <p>SMS consent is not required to use the service.</p>
+            <p>SMS messages are strictly transactional and may include order updates, job status notifications, and communication between customers and technicians.</p>
+            <p>Message frequency may vary. Message and data rates may apply.</p>
+            <p>Users can opt out at any time by replying STOP or request help by replying HELP.</p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-left">
+            <a class="logo" href="/">N<span>.</span>VA</a>
+            <p>&copy; 2026 NOVA by 1bfixer. All rights reserved.</p>
+        </div>
+        <div class="footer-right">
+            <a class="email-link" href="mailto:support@1bfixer.com">support@1bfixer.com</a>
+            <p>Chicago, IL &middot; United States</p>
+        </div>
+    </footer>
+
+</body>
+</html>
