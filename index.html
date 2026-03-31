@@ -27,7 +27,10 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { scroll-behavior: smooth; }
+        html { 
+            scroll-behavior: smooth;
+            overflow-x: hidden;
+        }
 
         body {
             font-family: 'DM Sans', sans-serif;
@@ -83,8 +86,6 @@
         .nav-links { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; }
         .nav-links a { text-decoration: none; color: var(--text); font-size: 14px; font-weight: 600; padding: 11px 18px; border-radius: 999px; border: 1px solid rgba(74, 158, 255, 0.2); background: rgba(74, 158, 255, 0.05); transition: all 0.25s ease; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent-bright); border-color: var(--accent-bright); background: var(--accent-dim-hover); }
-        .nav-badge { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--accent-bright); border: 1px solid var(--accent-bright); padding: 8px 14px; border-radius: 999px; animation: glowPulse 3s ease infinite; }
-
         .content { position: relative; z-index: 3; }
 
         .hero {
@@ -97,7 +98,7 @@
         .hero::before {
             content: '';
             position: absolute; top: -200px; left: 50%; transform: translateX(-50%);
-            width: 700px; height: 700px;
+            width: min(700px, 100vw); height: 700px;
             background: radial-gradient(circle, rgba(74, 158, 255, 0.1) 0%, transparent 70%);
             pointer-events: none; filter: blur(40px);
             animation: float 6s ease-in-out infinite;
@@ -376,7 +377,6 @@
             :root { --carousel-side-pad: 24px; }
             nav { padding: 16px 20px; flex-direction: column; align-items: flex-start; gap: 14px; }
             .nav-left { gap: 12px; width: 100%; }
-            .nav-badge { align-self: flex-end; margin-top: -40px; }
             .how-section-header { padding: 0 24px; }
             .atv-slide-inner { grid-template-columns: 1fr; min-height: auto; }
             .atv-slide-text { padding: 32px 24px 24px; box-shadow: none; }
@@ -426,7 +426,6 @@
             .logo { font-size: 20px; }
             .nav-links { gap: 6px; }
             .nav-links a { font-size: 12px; padding: 8px 12px; }
-            .nav-badge { font-size: 10px; padding: 6px 12px; }
             .hero { padding: 80px 12px 40px; }
             .hero h1 { font-size: clamp(28px, 7vw, 44px); }
             .hero-desc { font-size: 14px; margin-top: 16px; }
@@ -612,6 +611,8 @@
             color: rgba(107, 179, 255, 0.06);
             letter-spacing: -1px;
             white-space: nowrap;
+            max-width: 100%;
+            overflow: hidden;
             pointer-events: none;
         }
 
@@ -685,7 +686,7 @@
             position: absolute;
             top: 50%; left: 50%;
             transform: translate(-50%, -50%);
-            width: 500px; height: 500px;
+            width: min(500px, 100vw); height: 500px;
             background: radial-gradient(circle, rgba(74, 158, 255, 0.07) 0%, transparent 70%);
             pointer-events: none;
             filter: blur(40px);
@@ -754,7 +755,6 @@
                 <a href="/sms-consent/">SMS Consent</a>
             </div>
         </div>
-        <div class="nav-badge">Coming Soon</div>
     </nav>
 
     <div class="content">
@@ -791,8 +791,6 @@
                 </a>
             </div>
         </div>
-
-        <!-- REMOVED: trust-bar section -->
 
         <div class="why-section">
             <div class="how-section-header">
@@ -927,8 +925,6 @@
                 </div>
             </div>
         </div>
-
-        <!-- REMOVED: screenshots-section -->
 
         <div class="faq-section">
             <div class="how-section-header">
