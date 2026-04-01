@@ -1113,15 +1113,14 @@
         if (demoVideo && demoSection) {
             const videoObserver = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) {
+                    if (entry.intersectionRatio >= 0.35) {
                         const playPromise = demoVideo.play();
                         if (playPromise) playPromise.catch(() => {});
                     } else {
                         demoVideo.pause();
-                        demoVideo.currentTime = 0;
                     }
                 });
-            }, { threshold: 0.6 });
+            }, { threshold: [0, 0.35, 0.75] });
 
             videoObserver.observe(demoSection);
         }
