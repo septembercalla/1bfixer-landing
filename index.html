@@ -566,7 +566,7 @@
             border: 1px solid rgba(107, 179, 255, 0.25);
             background: linear-gradient(135deg, rgba(74, 158, 255, 0.04) 0%, rgba(13, 27, 61, 0.95) 100%);
             aspect-ratio: 16 / 9;
-            cursor: pointer;
+            cursor: default;
             box-shadow: 0 0 80px rgba(74, 158, 255, 0.06), 0 30px 80px rgba(0, 0, 0, 0.4);
             transition: all 0.4s ease;
         }
@@ -580,40 +580,15 @@
             top: -1px; left: 15%; right: 15%;
             height: 2px;
             background: linear-gradient(90deg, transparent, var(--accent-bright), transparent);
-        }
-        .video-play {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            width: 80px; height: 80px;
-            border-radius: 50%;
-            background: rgba(74, 158, 255, 0.15);
-            border: 2px solid rgba(107, 179, 255, 0.4);
-            backdrop-filter: blur(12px);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.4s ease;
-        }
-        .video-container:hover .video-play {
-            background: rgba(74, 158, 255, 0.25);
-            border-color: var(--accent-bright);
-            transform: translate(-50%, -50%) scale(1.08);
-            box-shadow: 0 0 40px rgba(74, 158, 255, 0.3);
-        }
-        .video-play svg { width: 28px; height: 28px; fill: var(--accent-bright); margin-left: 3px; }
-        .video-bg-text {
-            position: absolute;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            font-family: 'Instrument Serif', serif;
-            font-size: clamp(32px, 4vw, 56px);
-            color: rgba(107, 179, 255, 0.06);
-            letter-spacing: -1px;
-            white-space: nowrap;
-            max-width: 100%;
-            overflow: hidden;
+            z-index: 2;
             pointer-events: none;
+        }
+        .video-container video {
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: cover;
+            background: #071226;
         }
 
         /* ── FAQ section ── */
@@ -721,8 +696,6 @@
             .why-grid { grid-template-columns: 1fr; gap: 16px; }
             .why-card { padding: 24px 20px; }
             .video-section { padding: 40px 16px; }
-            .video-play { width: 64px; height: 64px; }
-            .video-play svg { width: 22px; height: 22px; }
             .faq-section { padding: 60px 16px 30px; }
             .faq-q { padding: 16px 20px; font-size: 14px; }
             .final-cta { padding: 60px 16px; }
@@ -919,10 +892,10 @@
                 <h2 class="section-title">See how it works</h2>
             </div>
             <div class="video-container">
-                <span class="video-bg-text">NOVA</span>
-                <div class="video-play">
-                    <svg viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3"/></svg>
-                </div>
+                <video controls muted loop playsinline preload="auto">
+                    <source src="demo.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
             </div>
         </div>
 
@@ -1132,6 +1105,26 @@
             el.style.transition = `opacity 0.6s ease ${i * 0.08}s, transform 0.6s ease ${i * 0.08}s`;
             fadeObserver.observe(el);
         });
+
+        // ===== Demo video autoplay on scroll =====
+        const demoVideo = document.querySelector('.video-container video');
+        const demoSection = document.querySelector('.video-section');
+
+        if (demoVideo && demoSection) {
+            const videoObserver = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const playPromise = demoVideo.play();
+                        if (playPromise) playPromise.catch(() => {});
+                    } else {
+                        demoVideo.pause();
+                        demoVideo.currentTime = 0;
+                    }
+                });
+            }, { threshold: 0.6 });
+
+            videoObserver.observe(demoSection);
+        }
     </script>
 
 </body>
